@@ -35,7 +35,12 @@
         "session",
         "daily brief",
         "briefing",
-        "request routing"
+        "request routing",
+        "plan the",
+        "digest",
+        "greeting",
+        "welcome",
+        "model status"
       ]
     },
     {
@@ -52,7 +57,7 @@
         "scope",
         "proposal",
         "technical spec",
-        "solution design"
+        "system design"
       ]
     },
     {
@@ -69,7 +74,8 @@
         "client update",
         "onboarding",
         "deliverable",
-        "course"
+        "course",
+        "lesson"
       ]
     },
     {
@@ -86,7 +92,9 @@
         "bot",
         "chatbot",
         "webhook",
-        "mcp"
+        "mcp",
+        "tool server",
+        "automation agent"
       ]
     },
     {
@@ -103,7 +111,16 @@
         "deploy",
         "provision",
         "migration",
-        "ollama"
+        "ollama",
+        "model serve",
+        "kaggle",
+        "gpu",
+        "weights",
+        "docker",
+        "systemd",
+        "unit",
+        "cargo build",
+        "service"
       ]
     },
     {
@@ -120,7 +137,12 @@
         "sqlite",
         "database",
         "ingest",
-        "dataset"
+        "dataset",
+        "fts",
+        "index build",
+        "collection",
+        "status.db",
+        "state.db"
       ]
     },
     {
@@ -137,7 +159,9 @@
         "retrieval",
         "chunk",
         "embedding",
-        "system prompt"
+        "system prompt",
+        "rag freshness",
+        "vector"
       ]
     },
     {
@@ -154,7 +178,10 @@
         "transliterat",
         "roman urdu",
         "localization",
-        "whisper"
+        "whisper",
+        "transcrib",
+        "speech",
+        "tts"
       ]
     },
     {
@@ -171,7 +198,11 @@
         "image",
         "detection",
         "onnx",
-        "video frame"
+        "video frame",
+        "screenshot",
+        "camera",
+        "smoke",
+        "fire"
       ]
     },
     {
@@ -188,7 +219,13 @@
         "front-end",
         "ui",
         "ux",
-        "landing"
+        "landing",
+        "page",
+        "css",
+        "site",
+        "chart render",
+        "html",
+        "canvas"
       ]
     },
     {
@@ -205,7 +242,19 @@
         "workflow",
         "inbox",
         "mail triage",
-        "label watcher"
+        "label watcher",
+        "sweep",
+        "reminder",
+        "reaper",
+        "cleanup",
+        "export",
+        "n8n",
+        "m365",
+        "zoom",
+        "meeting",
+        "attend",
+        "teams",
+        "mastermind"
       ]
     },
     {
@@ -222,7 +271,11 @@
         "self-qa",
         "audit",
         "independent check",
-        "ledger"
+        "ledger",
+        "regression",
+        "test",
+        "qa",
+        "baseline"
       ]
     },
     {
@@ -239,7 +292,15 @@
         "vault",
         "token rotation",
         "leak",
-        "privacy"
+        "privacy",
+        "pii",
+        "redact",
+        "hardening",
+        "guardrail",
+        "breach",
+        "permission",
+        "login error",
+        "sign-in"
       ]
     },
     {
@@ -256,7 +317,11 @@
         "quota",
         "budget",
         "spend",
-        "neuron"
+        "neuron",
+        "billing",
+        "finops",
+        "reserve",
+        "price"
       ]
     },
     {
@@ -273,7 +338,18 @@
         "uptime",
         "health",
         "sentinel",
-        "storm"
+        "storm",
+        "memory watch",
+        "disk",
+        "alert",
+        "tunnel",
+        "listen",
+        "unwedge",
+        "heartbeat",
+        "mem-watch",
+        "slow",
+        "diagnose",
+        "fix infra"
       ]
     },
     {
@@ -290,7 +366,11 @@
         "obsidian",
         "note",
         "concept ledger",
-        "gardener"
+        "gardener",
+        "compression",
+        "index",
+        "docs sweep",
+        "source sweep"
       ]
     },
     {
@@ -307,7 +387,10 @@
         "kpi",
         "report",
         "trend",
-        "funnel"
+        "funnel",
+        "stats",
+        "dashboard data",
+        "snapshot data"
       ]
     },
     {
@@ -324,7 +407,22 @@
         "post",
         "twitter",
         "tweet",
-        "seo"
+        "seo",
+        "outreach",
+        "cold email",
+        "lead",
+        "prospect",
+        "tender",
+        "job scout",
+        "follow-up",
+        "campaign",
+        "product hunt",
+        "gsc",
+        "followup",
+        "github",
+        "domain",
+        "ksa client",
+        "find client"
       ]
     },
     {
@@ -341,7 +439,9 @@
         "golden",
         "benchmark",
         "label",
-        "baseline rerun"
+        "baseline rerun",
+        "eval-baseline",
+        "scoring rubric"
       ]
     },
     {
@@ -358,7 +458,10 @@
         "adversarial",
         "attack",
         "jailbreak",
-        "injection"
+        "injection",
+        "pen test",
+        "abuse",
+        "malicious"
       ]
     },
     {
@@ -375,7 +478,8 @@
         "queue",
         "pending",
         "sign-off",
-        "human gate"
+        "human gate",
+        "waiting on owner"
       ]
     },
     {
@@ -392,7 +496,8 @@
         "control plane",
         "isolation",
         "deletion policy",
-        "per-client boundary"
+        "per-client boundary",
+        "quota policy"
       ]
     },
     {
@@ -409,7 +514,10 @@
         "capability ledger",
         "skills bench",
         "skill audit",
-        "skill adoption"
+        "skill adoption",
+        "skills-review",
+        "skill split",
+        "skills"
       ]
     },
     {
@@ -426,7 +534,13 @@
         "learning loop",
         "postmortem",
         "cost attribution",
-        "fleet digest"
+        "fleet digest",
+        "agent-run digest",
+        "trace",
+        "agent runs",
+        "learning-loop",
+        "project-radar",
+        "radar"
       ]
     }
   ],

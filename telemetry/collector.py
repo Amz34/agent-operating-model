@@ -16,6 +16,7 @@ import argparse
 import json
 import os
 import platform
+import shutil
 import socket
 import sys
 import time
@@ -58,9 +59,17 @@ def sample(include_host=False):
         if tail[:1] == "R":
             running += 1
 
-    st = os.statvfs("/")
-    disk_total = st.f_blocks * st.f_frsize / 2**30
-    disk_used = (st.f_blocks - st.f_bfree) * st.f_frsize / 2**30
+    disk_total, disk_used = 0.0, 0.0
+    try:  # statvfs is POSIX-only and Windows has no /proc either
+        st = os.statvfs("/")
+        disk_total = st.f_blocks * st.f_frsize / 2**30
+        disk_used = (st.f_blocks - st.f_bfree) * st.f_frsize / 2**30
+    except (AttributeError, OSError):
+        try:
+            usage = shutil.disk_usage(os.path.abspath(os.sep))
+            disk_total, disk_used = usage.total / 2**30, usage.used / 2**30
+        except OSError:
+            pass
 
     record = {
         "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
