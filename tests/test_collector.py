@@ -13,13 +13,18 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((ROOT / "telemetry" / "schema.json").read_text())["record"]
 
 
+def _kind(value):
+    """None is null in the schema, not NoneType in the interpreter."""
+    return "null" if value is None else type(value).__name__
+
+
 def test_record_matches_schema():
     rec = C.sample()
     for key in SCHEMA["required"]:
         assert key in rec, f"missing {key}"
     for key, kind in SCHEMA["types"].items():
         kinds = kind if isinstance(kind, list) else [kind]
-        assert type(rec[key]).__name__ in kinds, f"{key} is {type(rec[key]).__name__}"
+        assert _kind(rec[key]) in kinds, f"{key} is {_kind(rec[key])}"
     for section in ("cpu", "mem", "disk", "procs"):
         for key in SCHEMA[f"{section}_keys"]:
             assert key in rec[section], f"missing {section}.{key}"

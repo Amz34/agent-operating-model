@@ -23,7 +23,21 @@ def test_missing_ledger_reads_as_empty(tmp_path):
     assert ledger.rollup([]) == {"samples": 0}
 
 
-def test_rollup_reports_the_worst_case_and_the_window():
+def test_rollup_tolerates_metrics_the_host_cannot_report():
+    """macOS and Windows have no /proc: a null metric must not poison the rollup."""
+    records = [
+        {"ts": "t1", "cpu": {}, "mem": {"used_pct": None}, "disk": {"used_pct": None},
+         "sample_ms": 9},
+        {"ts": "t2", "cpu": {}, "mem": {"used_pct": 30.0}, "disk": {}, "sample_ms": 11},
+    ]
+    row = ledger.rollup(records)
+    assert row["mem_used_pct"] == {"max": 30.0, "avg": 30.0}
+    assert row["disk_used_pct"] == {"max": None, "avg": None}
+    assert row["load_1"] == {"max": None, "avg": None}
+    assert row["sample_ms"]["avg"] == 10.0
+
+
+def test_rollup_reports_worst_case_and_window():
     records = [
         {"ts": "t1", "cpu": {"load_1": 1.0}, "mem": {"used_pct": 10.0},
          "disk": {"used_pct": 20.0}, "sample_ms": 8},

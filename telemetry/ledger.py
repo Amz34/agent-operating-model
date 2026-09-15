@@ -46,30 +46,41 @@ def read(path):
     return records
 
 
+def _num(value):
+    """Metrics are missing on platforms without /proc; that must never become a crash."""
+    return value if isinstance(value, (int, float)) else None
+
+
 def _load(record):
-    return record.get("cpu", {}).get("load_1", 0)
+    return _num(record.get("cpu", {}).get("load_1"))
 
 
 def _pct(record, key):
-    return record.get(key, {}).get("used_pct", 0)
+    return _num(record.get(key, {}).get("used_pct"))
+
+
+def _spread(values):
+    seen = [v for v in values if v is not None]
+    if not seen:
+        return {"max": None, "avg": None}
+    return {"max": max(seen), "avg": round(sum(seen) / len(seen), 2)}
 
 
 def rollup(records):
-    """Trend view over a ledger: how many samples, over what window, and the worst seen."""
+    """Trend view over a ledger: how many samples, over what window, and the worst seen.
+
+    A metric the host cannot report stays null instead of poisoning the whole rollup.
+    """
     if not records:
         return {"samples": 0}
-    loads = [_load(r) for r in records]
-    mems = [_pct(r, "mem") for r in records]
-    disks = [_pct(r, "disk") for r in records]
-    millis = [r.get("sample_ms", 0) for r in records]
     return {
         "samples": len(records),
         "first_ts": records[0].get("ts"),
         "last_ts": records[-1].get("ts"),
-        "load_1": {"max": max(loads), "avg": round(sum(loads) / len(loads), 2)},
-        "mem_used_pct": {"max": max(mems), "avg": round(sum(mems) / len(mems), 2)},
-        "disk_used_pct": {"max": max(disks), "avg": round(sum(disks) / len(disks), 2)},
-        "sample_ms": {"max": max(millis), "avg": round(sum(millis) / len(millis), 2)},
+        "load_1": _spread([_load(r) for r in records]),
+        "mem_used_pct": _spread([_pct(r, "mem") for r in records]),
+        "disk_used_pct": _spread([_pct(r, "disk") for r in records]),
+        "sample_ms": _spread([r.get("sample_ms") for r in records]),
     }
 
 
