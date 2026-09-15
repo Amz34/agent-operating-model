@@ -1,0 +1,433 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-09-15",
+  "fleet": {
+    "seats": 24,
+    "planes": 8,
+    "tiers": [
+      "assurance",
+      "build",
+      "command",
+      "growth",
+      "intelligence",
+      "new"
+    ],
+    "autonomy_levels": [
+      "L0",
+      "L1",
+      "L2",
+      "L3",
+      "L4"
+    ]
+  },
+  "roles": [
+    {
+      "id": "D1",
+      "title": "Chief of Staff — Orchestrator",
+      "tier": "command",
+      "plane": "P5",
+      "autonomy": "L2",
+      "cost_tier": "T1",
+      "mandate": "Owns intent intake, routing, and the run board; every task has one owner on this board.",
+      "signals": [
+        "orchestrat",
+        "chief of staff",
+        "session",
+        "daily brief",
+        "briefing",
+        "request routing"
+      ]
+    },
+    {
+      "id": "D2",
+      "title": "Delivery Architect (AI Engineer)",
+      "tier": "command",
+      "plane": "P5",
+      "autonomy": "L1",
+      "cost_tier": "T2",
+      "mandate": "Turns a request into a reviewed design; design gate before build starts.",
+      "signals": [
+        "architect",
+        "solution design",
+        "scope",
+        "proposal",
+        "technical spec",
+        "solution design"
+      ]
+    },
+    {
+      "id": "D3",
+      "title": "Client Delivery Manager",
+      "tier": "command",
+      "plane": "P5",
+      "autonomy": "L2",
+      "cost_tier": "T1",
+      "mandate": "Owns client-facing delivery, cadence and acceptance.",
+      "signals": [
+        "client delivery",
+        "client report",
+        "client update",
+        "onboarding",
+        "deliverable",
+        "course"
+      ]
+    },
+    {
+      "id": "D4",
+      "title": "Agent Engineer",
+      "tier": "build",
+      "plane": "P5",
+      "autonomy": "L3",
+      "cost_tier": "T2",
+      "mandate": "Builds and maintains agent surfaces (bots, webhooks, tools).",
+      "signals": [
+        "agent",
+        "telegram bot",
+        "bot",
+        "chatbot",
+        "webhook",
+        "mcp"
+      ]
+    },
+    {
+      "id": "D5",
+      "title": "Platform / MLOps Engineer",
+      "tier": "build",
+      "plane": "P0",
+      "autonomy": "L3",
+      "cost_tier": "T2",
+      "mandate": "Owns compute, model serving, deploys and restore drills.",
+      "signals": [
+        "backup",
+        "restore",
+        "deploy",
+        "provision",
+        "migration",
+        "ollama"
+      ]
+    },
+    {
+      "id": "D6",
+      "title": "Data Engineer",
+      "tier": "build",
+      "plane": "P1",
+      "autonomy": "L3",
+      "cost_tier": "T0",
+      "mandate": "Owns schemas, ingest and retention of operational data.",
+      "signals": [
+        "etl",
+        "pipeline",
+        "sqlite",
+        "database",
+        "ingest",
+        "dataset"
+      ]
+    },
+    {
+      "id": "D7",
+      "title": "Context Engineer (Prompt + Retrieval)",
+      "tier": "build",
+      "plane": "P3",
+      "autonomy": "L3",
+      "cost_tier": "T2",
+      "mandate": "Owns prompt/context assembly and retrieval quality.",
+      "signals": [
+        "prompt",
+        "context window",
+        "retrieval",
+        "chunk",
+        "embedding",
+        "system prompt"
+      ]
+    },
+    {
+      "id": "D8",
+      "title": "NLP & Localization Engineer",
+      "tier": "build",
+      "plane": "P2",
+      "autonomy": "L3",
+      "cost_tier": "T1",
+      "mandate": "Owns language quality: bilingual copy, transcript, speech.",
+      "signals": [
+        "translat",
+        "arabic",
+        "transliterat",
+        "roman urdu",
+        "localization",
+        "whisper"
+      ]
+    },
+    {
+      "id": "D9",
+      "title": "Vision Engineer",
+      "tier": "build",
+      "plane": "P2",
+      "autonomy": "L3",
+      "cost_tier": "T2",
+      "mandate": "Owns visual pipelines (OCR, detection, on-device inference).",
+      "signals": [
+        "ocr",
+        "vision",
+        "image",
+        "detection",
+        "onnx",
+        "video frame"
+      ]
+    },
+    {
+      "id": "D10",
+      "title": "Front-end / UX Engineer",
+      "tier": "build",
+      "plane": "P6",
+      "autonomy": "L2",
+      "cost_tier": "T2",
+      "mandate": "Owns the interface plane: dashboards, pages, print/PDF output.",
+      "signals": [
+        "dashboard",
+        "frontend",
+        "front-end",
+        "ui",
+        "ux",
+        "landing"
+      ]
+    },
+    {
+      "id": "D11",
+      "title": "Automation Specialist (Process)",
+      "tier": "build",
+      "plane": "P5",
+      "autonomy": "L3",
+      "cost_tier": "T0",
+      "mandate": "Owns recurring process automation and inbox-side plumbing.",
+      "signals": [
+        "cron",
+        "schedule",
+        "workflow",
+        "inbox",
+        "mail triage",
+        "label watcher"
+      ]
+    },
+    {
+      "id": "D12",
+      "title": "QA & Verification Engineer",
+      "tier": "assurance",
+      "plane": "P4",
+      "autonomy": "L4",
+      "cost_tier": "T3",
+      "mandate": "Independent verification; a verdict from a different provider than the producer.",
+      "signals": [
+        "verification",
+        "verify",
+        "self-qa",
+        "audit",
+        "independent check",
+        "ledger"
+      ]
+    },
+    {
+      "id": "D13",
+      "title": "Security & Privacy Analyst",
+      "tier": "assurance",
+      "plane": "P4",
+      "autonomy": "L4",
+      "cost_tier": "T4",
+      "mandate": "Scans and blocking are L4; any policy change is L0.",
+      "signals": [
+        "security",
+        "secret",
+        "vault",
+        "token rotation",
+        "leak",
+        "privacy"
+      ]
+    },
+    {
+      "id": "D14",
+      "title": "FinOps Controller",
+      "tier": "assurance",
+      "plane": "P4",
+      "autonomy": "L1",
+      "cost_tier": "T0",
+      "mandate": "Owns spend guardrails: quota, balance and per-run cost ceilings.",
+      "signals": [
+        "cost",
+        "balance",
+        "quota",
+        "budget",
+        "spend",
+        "neuron"
+      ]
+    },
+    {
+      "id": "D15",
+      "title": "Reliability / SRE",
+      "tier": "assurance",
+      "plane": "P4",
+      "autonomy": "L4",
+      "cost_tier": "T0",
+      "mandate": "Owns watchdogs, alerting and service health.",
+      "signals": [
+        "watchdog",
+        "monitor",
+        "uptime",
+        "health",
+        "sentinel",
+        "storm"
+      ]
+    },
+    {
+      "id": "D16",
+      "title": "Knowledge Librarian",
+      "tier": "intelligence",
+      "plane": "P3",
+      "autonomy": "L3",
+      "cost_tier": "T0",
+      "mandate": "Owns the knowledge corpus: structure, provenance, freshness.",
+      "signals": [
+        "brain",
+        "knowledge",
+        "obsidian",
+        "note",
+        "concept ledger",
+        "gardener"
+      ]
+    },
+    {
+      "id": "D17",
+      "title": "Analytics Engineer",
+      "tier": "intelligence",
+      "plane": "P3",
+      "autonomy": "L3",
+      "cost_tier": "T0",
+      "mandate": "Owns metrics definitions and the analytics layer.",
+      "signals": [
+        "analytics",
+        "metric",
+        "kpi",
+        "report",
+        "trend",
+        "funnel"
+      ]
+    },
+    {
+      "id": "D18",
+      "title": "Growth Operator (GTM)",
+      "tier": "growth",
+      "plane": "P7",
+      "autonomy": "L2",
+      "cost_tier": "T1",
+      "mandate": "Owns demand generation: content, outreach, lead flow.",
+      "signals": [
+        "linkedin",
+        "carousel",
+        "post",
+        "twitter",
+        "tweet",
+        "seo"
+      ]
+    },
+    {
+      "id": "D19",
+      "title": "Eval Data Curator",
+      "tier": "new",
+      "plane": "P4",
+      "autonomy": "L3",
+      "cost_tier": "T3",
+      "mandate": "Owns the eval corpus; no eval set within 60 days means the role is merged.",
+      "signals": [
+        "eval set",
+        "eval data",
+        "golden",
+        "benchmark",
+        "label",
+        "baseline rerun"
+      ]
+    },
+    {
+      "id": "D20",
+      "title": "Red-team / Adversarial QA",
+      "tier": "new",
+      "plane": "P4",
+      "autonomy": "L3",
+      "cost_tier": "T2",
+      "mandate": "Attacks our own surfaces before a client does.",
+      "signals": [
+        "red team",
+        "red-team",
+        "adversarial",
+        "attack",
+        "jailbreak",
+        "injection"
+      ]
+    },
+    {
+      "id": "D21",
+      "title": "Approval Warden",
+      "tier": "new",
+      "plane": "P4",
+      "autonomy": "L3",
+      "cost_tier": "T1",
+      "mandate": "Owns the approval queue; nothing irreversible passes without a recorded approval.",
+      "signals": [
+        "approval",
+        "approve",
+        "queue",
+        "pending",
+        "sign-off",
+        "human gate"
+      ]
+    },
+    {
+      "id": "D22",
+      "title": "Multi-tenant Control Plane Engineer",
+      "tier": "new",
+      "plane": "P4",
+      "autonomy": "L0",
+      "cost_tier": "T4",
+      "mandate": "Owns tenant isolation; data-deletion policy is L0 (never autonomous).",
+      "signals": [
+        "tenant",
+        "multi-tenant",
+        "control plane",
+        "isolation",
+        "deletion policy",
+        "per-client boundary"
+      ]
+    },
+    {
+      "id": "D23",
+      "title": "Skill Librarian",
+      "tier": "new",
+      "plane": "P3",
+      "autonomy": "L3",
+      "cost_tier": "T0",
+      "mandate": "Owns the skill corpus: hygiene, adoption gate, de-duplication.",
+      "signals": [
+        "skill hygiene",
+        "skill librarian",
+        "capability ledger",
+        "skills bench",
+        "skill audit",
+        "skill adoption"
+      ]
+    },
+    {
+      "id": "D24",
+      "title": "Observability & Learning Engineer",
+      "tier": "new",
+      "plane": "P4",
+      "autonomy": "L4",
+      "cost_tier": "T0",
+      "mandate": "Owns telemetry, run attribution and the learning loop.",
+      "signals": [
+        "telemetry",
+        "observability",
+        "learning loop",
+        "postmortem",
+        "cost attribution",
+        "fleet digest"
+      ]
+    }
+  ]
+}

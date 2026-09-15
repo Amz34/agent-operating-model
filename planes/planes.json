@@ -1,0 +1,120 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-09-15",
+  "contract_layout": [
+    {
+      "contract": "verification",
+      "owner": "D12",
+      "plane": "P4",
+      "intent": "verdict on a different provider"
+    },
+    {
+      "contract": "security",
+      "owner": "D13",
+      "plane": "P4",
+      "intent": "secrets, redaction, injection defence"
+    },
+    {
+      "contract": "deploy",
+      "owner": "D5",
+      "plane": "P0",
+      "intent": "preview first, then production"
+    },
+    {
+      "contract": "approvals",
+      "owner": "D21",
+      "plane": "P4",
+      "intent": "L3 queue · rollback path"
+    },
+    {
+      "contract": "telemetry",
+      "owner": "D24",
+      "plane": "P4",
+      "intent": "per-designation SLO · cost attribution"
+    }
+  ],
+  "planes": [
+    {
+      "id": "P7",
+      "name": "GROWTH",
+      "purpose": "Growth: demand, content, leads and everything revenue-facing.",
+      "owner": "D18",
+      "seats": 1,
+      "binds": []
+    },
+    {
+      "id": "P6",
+      "name": "INTERFACE",
+      "purpose": "Interface: how humans reach the system and how it reports back.",
+      "owner": "D10",
+      "seats": 1,
+      "binds": []
+    },
+    {
+      "id": "P5",
+      "name": "AGENT ORG",
+      "purpose": "Agent org: the seats, their mandates, handoffs and escalation.",
+      "owner": "D1",
+      "seats": 5,
+      "binds": [
+        "approvals",
+        "verification"
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "GOVERNANCE",
+      "purpose": "Governance: authority, autonomy envelopes, verification and security.",
+      "owner": "D12",
+      "seats": 9,
+      "binds": [
+        "approvals",
+        "verification"
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "INTELLIGENCE",
+      "purpose": "Intelligence: turning raw signal into decisions someone can act on.",
+      "owner": "D7",
+      "seats": 4,
+      "binds": [
+        "approvals",
+        "verification"
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "MODEL",
+      "purpose": "Model: which intelligence is called, at what cost, under what fallback.",
+      "owner": "D8",
+      "seats": 2,
+      "binds": [
+        "approvals",
+        "verification"
+      ]
+    },
+    {
+      "id": "P1",
+      "name": "DATA",
+      "purpose": "Data: where truth is stored, shaped and made queryable.",
+      "owner": "D6",
+      "seats": 1,
+      "binds": [
+        "approvals",
+        "verification"
+      ]
+    },
+    {
+      "id": "P0",
+      "name": "COMPUTE",
+      "purpose": "Compute substrate: the machine, its limits and everything that keeps it alive.",
+      "owner": "D5",
+      "seats": 1,
+      "binds": [
+        "approvals",
+        "verification"
+      ]
+    }
+  ]
+}

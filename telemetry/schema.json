@@ -1,0 +1,21 @@
+{
+  "record": {
+    "required": ["ts", "cpu", "mem", "disk", "procs", "uptime_s", "arch", "sample_ms"],
+    "optional": ["host"],
+    "types": {
+      "ts": "str",
+      "cpu": "dict",
+      "mem": "dict",
+      "disk": "dict",
+      "procs": "dict",
+      "uptime_s": ["int", "null"],
+      "arch": "str",
+      "sample_ms": "float"
+    },
+    "cpu_keys": ["cores", "load_1", "load_5", "load_15"],
+    "mem_keys": ["total_mb", "avail_mb", "used_pct"],
+    "disk_keys": ["total_gb", "used_pct"],
+    "procs_keys": ["total", "running"]
+  },
+  "note": "One flat record per sample. host is opt-in so a ledger stays safe to share."
+}

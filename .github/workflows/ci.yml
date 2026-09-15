@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Dev dependencies
+        run: python -m pip install --upgrade pip -r requirements.txt
+      - name: Audit the operating model
+        run: python -m governance.audit --json
+      - name: Sample telemetry once
+        run: python -m telemetry.collector
+      - name: Tests
+        run: python -m pytest -q

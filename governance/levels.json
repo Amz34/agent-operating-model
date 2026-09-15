@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-09-15",
+  "levels": [
+    {
+      "id": "L0",
+      "name": "human-decides",
+      "definition": "High consequence, ambiguous, or accountability-bearing. Agent may only inform."
+    },
+    {
+      "id": "L1",
+      "name": "ai-advises",
+      "definition": "Agent analyses and proposes. Human performs the action. No autonomous effect."
+    },
+    {
+      "id": "L2",
+      "name": "ai-recommends",
+      "definition": "Agent drafts/prepares artifacts (in-VM only). Human reviews and applies."
+    },
+    {
+      "id": "L3",
+      "name": "agent-with-approval",
+      "definition": "Agent executes end-to-end but only with an approval checkpoint plus a mandatory verification gate and a dead-letter path."
+    },
+    {
+      "id": "L4",
+      "name": "agent-autonomous",
+      "definition": "Agent detects, acts, verifies and logs without a human in the loop. Allowed ONLY for internal or owner-notification effects. Reversible by design."
+    }
+  ],
+  "escalation_ladder": [
+    "agent self-check",
+    "same-designation retry x1",
+    "D12 verification",
+    "D21 approval queue (human)",
+    "D1 Chief of Staff",
+    "OWNER (L0 only)"
+  ]
+}
