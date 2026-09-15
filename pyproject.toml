@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-operating-model"
+version = "0.2.0"
+description = "Role specs, a contract layout, a task router and the auditors that keep an agent fleet honest"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Aamir Zameer" }]
+keywords = ["agents", "multi-agent", "governance", "observability", "orchestration"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.6"]
+
+[project.scripts]
+aom-audit = "governance.audit:main"
+aom-route = "governance.router:main"
+aom-budget = "governance.budget:main"
+aom-telemetry = "telemetry.collector:main"
+aom-ledger = "telemetry.ledger:main"
+
+[tool.setuptools]
+packages = ["governance", "telemetry"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "ISC", "UP", "B"]
+# Long descriptive strings are the point in a model repo; the formatter is not the reviewer.
+ignore = ["E501"]

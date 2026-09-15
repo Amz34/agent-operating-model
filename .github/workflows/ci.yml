@@ -1,28 +1,40 @@
-name: CI
+name: ci
 
 on:
   push:
-    branches: [main]
   pull_request:
   workflow_dispatch:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    name: test (${{ matrix.os }} / ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12"]
+        include:
+          - { os: ubuntu-latest, python-version: "3.11" }
+          - { os: ubuntu-latest, python-version: "3.12" }
+          - { os: macos-latest, python-version: "3.12" }
+          - { os: windows-latest, python-version: "3.12" }
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Dev dependencies
-        run: python -m pip install --upgrade pip -r requirements.txt
-      - name: Audit the operating model
-        run: python -m governance.audit --json
-      - name: Sample telemetry once
-        run: python -m telemetry.collector
-      - name: Tests
-        run: python -m pytest -q
+      - name: Install (editable, with dev extras)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+      - name: Lint
+        run: python -m ruff check .
+      - name: Test with coverage
+        run: python -m pytest --cov=governance --cov=telemetry --cov-report=term-missing
+      - name: Audit the shipped model
+        run: python -m governance.audit
+      - name: Route a task
+        run: python -m governance.router "rotate the api key and notify the client"
+      - name: Console scripts
+        run: |
+          aom-audit
+          aom-budget

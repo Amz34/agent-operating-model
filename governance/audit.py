@@ -8,6 +8,7 @@ Rules (each one is a real failure mode we hit while running an agent org):
   E_CONTRACT               every contract must be owned by a seat that exists
   E_UNGUARDED              a plane granting L3+ must bind the verification + approvals contracts
   E_LADDER                 the escalation ladder is what makes L0 mean anything
+  E_SCHEMA / E_NO_BUDGET   the model declares its version, and no tier is unbounded spend
 """
 from __future__ import annotations
 
@@ -21,6 +22,7 @@ LEVEL_ORDER = ["L0", "L1", "L2", "L3", "L4"]
 GOVERNED = {"verification", "approvals"}
 PLANE_RE = re.compile(r"^P[0-7]$")
 COST_TIERS = {f"T{i}" for i in range(5)}
+SCHEMA_VERSION = 1
 HERE = Path(__file__).resolve().parent
 DEFAULTS = {
     "roles": HERE.parent / "roles" / "roles.json",
@@ -55,6 +57,15 @@ def audit(roles_doc, planes_doc, levels_doc):
             findings.append(("E_COST", rid, f"unknown cost tier {role.get('cost_tier')!r}"))
         if len(str(role.get("mandate", ""))) < 20:
             findings.append(("E_MANDATE", rid, "mandate under 20 chars - unenforceable"))
+
+    if roles_doc.get("schema_version") != SCHEMA_VERSION:
+        findings.append(("E_SCHEMA", "roles",
+                         f"schema_version {roles_doc.get('schema_version')!r} != {SCHEMA_VERSION}"))
+
+    declared = roles_doc.get("budget", {})
+    for tier in sorted({r.get("cost_tier") for r in roles if r.get("cost_tier")}):
+        if tier not in declared:
+            findings.append(("E_NO_BUDGET", tier, "cost tier in use with no declared ceiling"))
 
     nums = sorted(int(x[1:]) for x in found if x.startswith("D") and x[1:].isdigit())
     if nums and nums != list(range(1, len(nums) + 1)):

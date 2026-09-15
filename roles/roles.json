@@ -23,7 +23,7 @@
   "roles": [
     {
       "id": "D1",
-      "title": "Chief of Staff — Orchestrator",
+      "title": "Chief of Staff \u2014 Orchestrator",
       "tier": "command",
       "plane": "P5",
       "autonomy": "L2",
@@ -429,5 +429,13 @@
         "fleet digest"
       ]
     }
-  ]
+  ],
+  "schema_version": 1,
+  "budget": {
+    "T0": 0,
+    "T1": 1,
+    "T2": 5,
+    "T3": 15,
+    "T4": 40
+  }
 }

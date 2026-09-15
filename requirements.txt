@@ -1,2 +1,3 @@
-# The model ships stdlib-only; pytest is the only thing CI installs.
+# The model ships stdlib-only. This file only carries what CI needs to check it:
+#   python -m pip install -e ".[dev]"
 pytest>=8

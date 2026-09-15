@@ -24,13 +24,13 @@
       "contract": "approvals",
       "owner": "D21",
       "plane": "P4",
-      "intent": "L3 queue · rollback path"
+      "intent": "L3 queue \u00b7 rollback path"
     },
     {
       "contract": "telemetry",
       "owner": "D24",
       "plane": "P4",
-      "intent": "per-designation SLO · cost attribution"
+      "intent": "per-designation SLO \u00b7 cost attribution"
     }
   ],
   "planes": [
@@ -116,5 +116,6 @@
         "verification"
       ]
     }
-  ]
+  ],
+  "schema_version": 1
 }

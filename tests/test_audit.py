@@ -12,7 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 @pytest.fixture(scope="module")
 def bundle():
-    load = lambda p: json.loads((ROOT / p).read_text(encoding="utf-8"))
+    def load(name):
+        return json.loads((ROOT / name).read_text(encoding="utf-8"))
+
     return load("roles/roles.json"), load("planes/planes.json"), load("governance/levels.json")
 
 

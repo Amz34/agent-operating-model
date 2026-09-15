@@ -1,8 +1,13 @@
 """Telemetry contract tests: the ledger has to stay machine-readable and shareable."""
 import json
+import sys
 from pathlib import Path
 
+import pytest
+
 from telemetry import collector as C
+
+LINUX = pytest.mark.skipif(sys.platform != "linux", reason="reads /proc, Linux only")
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((ROOT / "telemetry" / "schema.json").read_text())["record"]
@@ -28,11 +33,17 @@ def test_redaction_is_the_default():
 def test_values_are_bounded():
     rec = C.sample()
     assert rec["cpu"]["cores"] >= 1
-    assert rec["procs"]["total"] >= 1
-    assert rec["procs"]["running"] <= rec["procs"]["total"]
     for pct in (rec["mem"]["used_pct"], rec["disk"]["used_pct"]):
         assert pct is None or 0 <= pct <= 100
     assert rec["sample_ms"] < 5000, "a sample slower than 5s cannot run every 30s"
+
+
+@LINUX
+def test_live_counters_on_linux():
+    rec = C.sample()
+    assert rec["procs"]["total"] >= 1
+    assert rec["procs"]["running"] <= rec["procs"]["total"]
+    assert rec["mem"]["used_pct"] is not None and rec["cpu"]["load_1"] is not None
 
 
 def test_cli_writes_a_jsonl_ledger(tmp_path, capsys):
