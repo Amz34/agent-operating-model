@@ -65,6 +65,8 @@ The layout shipped here binds five:
 Any plane granting **L3 or higher** must bind `verification` **and** `approvals`. That is enforced by
 `E_UNGUARDED` in the auditor — not by a paragraph in a wiki that nobody reads at 2am.
 
+![The auditor refusing a broken model](assets/audit-findings.png)
+
 ## Autonomy ladder
 
 | Level | Name | What the agent may do |
@@ -106,6 +108,26 @@ python -m governance.audit --roles my-org/roles.json --planes my-org/planes.json
 | CI green on 3.11 and 3.12 | the badge above |
 | Model passes its own rules | `test_shipped_model_is_clean` |
 | Sampling costs < 10 ms | the `sample_ms` field on any record |
+
+## Proof of life
+
+Every screenshot below is a real capture of this repo's own commands on one small cloud box — no mockups.
+
+**A clean roster** — `python -m governance.audit`:
+
+![Clean audit](assets/audit-clean.png)
+
+**The suite** — `python -m pytest -q`:
+
+![Tests passing](assets/tests-pass.png)
+
+**One telemetry sample** — `python -m telemetry.collector | python -m json.tool` (note what is *not* in there: no hostname, no user, nothing that identifies the box):
+
+![Telemetry record](assets/telemetry-record.png)
+
+**CI** — GitHub Actions, Python 3.11 and 3.12:
+
+![CI green](assets/ci-green.png)
 
 ## Fork it and make it yours
 
