@@ -14,6 +14,29 @@ Role specifications, the multi-plane contract layout, a task router and the audi
 governed multi-agent organisation honest — the part that normally stays in someone's head until it
 breaks.
 
+## What this is - and what it is not
+
+| This is | This is not |
+|---|---|
+| an org chart + rulebook your agents are measured against, as checkable data | an agent framework - nothing here runs your agents |
+| four small standard-library tools that read and check that data | a hosted service, a database, or a UI |
+| a router that decides **which seat owns a task**, plus the gate for when it needs approval | an executor: the router returns a plan, it does not take the action |
+| an auditor that fails a build when the model breaks its own rules | a runtime, a scheduler, or an LLM wrapper |
+| a spec another team's system can be measured against | something that needs a model call to work |
+
+**In one line:** this is the paperwork a multi-agent system needs before it is allowed to act - with
+the paperwork machine-checked instead of aspirational.
+
+### Plain-English glossary
+
+| Term | Plain meaning | Where it lives |
+|---|---|---|
+| **seat** | one accountable job in the fleet - a role like "Deploy Engineer", not a person and not a process | `roles/roles.json` |
+| **plane** | a failure domain: if it breaks, that part of the org stops | `planes/planes.json` |
+| **contract** | a guarantee one seat owns and the planes must honour (verification, approvals, security, deploy, telemetry) | `planes/planes.json` |
+| **autonomy level** (L0-L4) | how much a seat may do before a human approves - from "inform only" to "fully owns the plane" | `governance/levels.json` |
+| **cost tier** (T0-T4) | the daily spend ceiling for the seat's tier, checked against real spend | `roles/roles.json` |
+
 ![The operating model: five autonomy levels, eight planes](assets/operating-model.svg)
 
 ## The problem
