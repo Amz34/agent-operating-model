@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -23,10 +24,23 @@ def load(path):
     return json.loads(Path(path).read_text())
 
 
+def _matches(needle, hay):
+    """Whole-token match, tolerant of plurals and simple suffixes.
+
+    Signals include two-letter tokens (`ui`, `ux`, `qa`, `bot`, `seo`). Plain substring matching
+    let "build" contain `ui`, "both" contain `bot` and "auxiliary" contain `ux`, so ordinary task
+    text routed to a specialist seat at medium confidence and the unrouted fallback never fired.
+    Match only on token edges.
+    """
+    needle = needle.lower()
+    tail = r"[a-z]{0,5}" if len(needle) >= 5 else r"s?"
+    return re.search(rf"(?<![a-z0-9]){re.escape(needle)}{tail}(?![a-z0-9])", hay) is not None
+
+
 def _score(text, seat):
     hay = text.lower()
-    hits = [s for s in seat.get("signals", []) if s.lower() in hay]
-    heads = [w for w in str(seat.get("title", "")).lower().split() if len(w) > 3 and w in hay]
+    hits = [s for s in seat.get("signals", []) if _matches(s, hay)]
+    heads = [w for w in str(seat.get("title", "")).lower().split() if len(w) > 3 and _matches(w, hay)]
     return len(hits) * 2 + len(heads), hits, heads
 
 

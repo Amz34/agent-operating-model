@@ -46,3 +46,28 @@ def test_cli_plan_json_and_strict_exit_code(capsys):
     assert payload["seat"] and payload["why"]
     assert main(["--strict", "zzzq qqqw vvvu"]) == 1
     assert "D1" in format_plan(route("zzzq qqqw vvvu", ROLES, PLANES))
+
+
+def test_short_signals_never_match_inside_unrelated_words():
+    # `ui` hides inside "build", `bot` inside "both", `ux` inside "auxiliary".
+    for text in ("queue the build", "do both of them", "auxiliary cable"):
+        plan = route(text, ROLES, PLANES)
+        assert not {"ui", "ux", "bot"} & set(plan["matched"])
+
+
+def test_gibberish_containing_a_short_signal_still_falls_back():
+    plan = route("xyzzy plugh frobnicate quux", ROLES, PLANES)
+    assert plan["unrouted"] is True
+    assert plan["seat"] == "D1"
+    assert plan["matched"] == []
+
+
+def test_real_two_letter_signals_still_match_on_token_edges():
+    assert route("build the ui for the client dashboard", ROLES, PLANES)["seat"] == "D10"
+    assert "qa" in route("run the qa pass before release", ROLES, PLANES)["matched"]
+
+
+def test_the_readme_example_routes_exactly_as_documented():
+    plan = route("rotate the API key and tell the client", ROLES, PLANES)
+    assert (plan["seat"], plan["confidence"], plan["matched"]) == ("D3", "low", ["client"])
+    assert plan["requires_approval"] is False

@@ -3,7 +3,7 @@
 **One box. 24 named seats. 8 planes. Nobody owns "everything".**
 
 [![CI](https://github.com/Amz34/agent-operating-model/actions/workflows/ci.yml/badge.svg)](https://github.com/Amz34/agent-operating-model/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-33%20passing-brightgreen.svg)](#verified-numbers)
+[![Tests](https://img.shields.io/badge/tests-37%20passing-brightgreen.svg)](#verified-numbers)
 [![Coverage](https://img.shields.io/badge/coverage-94%25-brightgreen.svg)](#verified-numbers)
 [![Lint](https://img.shields.io/badge/lint-ruff%20clean-blue.svg)](#quickstart)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](#quickstart)
@@ -66,7 +66,7 @@ four small standard-library tools, so it drops into whatever runtime you already
 | `telemetry/collector.py` | one host sample: load, memory, disk, process pressure, uptime → flat JSON |
 | `telemetry/ledger.py` | those samples over time: rollups and threshold alerts |
 | `docs/design.md` | why the model looks like this (three decisions carry the rest) |
-| `tests/` | 33 tests: the model passes its own rules, and every rule fires when violated |
+| `tests/` | 37 tests: the model passes its own rules, every rule fires when violated, and routing cannot false-positive on substrings |
 
 ## Quickstart
 
@@ -78,7 +78,7 @@ python -m governance.audit          # 24 seats across 8 planes -> result: clean
 python -m governance.router "rotate the API key and tell the client"
 python -m governance.budget         # per-tier ceilings and allowances
 python -m telemetry.collector       # one sample, ~10 ms
-python -m pytest -q                 # 33 passed
+python -m pytest -q                 # 37 passed
 ```
 
 Nothing to install: Python 3.11+ and the standard library. Dev tooling is one line —
@@ -192,7 +192,7 @@ python -m governance.audit --roles my-org/roles.json --planes my-org/planes.json
 | Claim | How to check it |
 |---|---|
 | 24 seats, 8 planes, 5 autonomy levels, 14 rule codes | `python -m governance.audit` |
-| 33 tests pass | `python -m pytest -q` |
+| 37 tests pass | `python -m pytest -q` |
 | 94% coverage | `python -m pytest --cov=governance --cov=telemetry` |
 | Lint clean (ruff: E, F, I, ISC, UP, B) | `python -m ruff check .` |
 | CI green on Linux 3.11/3.12 + macOS + Windows | the badge above |

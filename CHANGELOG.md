@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.1
+
+- **Fixed** `governance/router.py` — signals and title words now match on token edges instead of
+  as bare substrings. Two-letter signals (`ui`, `ux`, `qa`, `bot`) used to fire inside unrelated
+  words, so `"queue the build"` routed to the Front-end seat on the `ui` in *build*, and gibberish
+  containing `ux` could never fall back to triage. Four regression tests added; the false-positive
+  cases and the documented example are now pinned by tests.
+- **Docs** test count refreshed (33 -> 37) and the routing row in the README says what the added
+  tests actually guard.
+
 ## 0.2.0
 
 - **Added** `governance/router.py` — deterministic task-to-seat routing with the approval gate and
